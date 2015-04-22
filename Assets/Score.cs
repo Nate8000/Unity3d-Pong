@@ -4,15 +4,24 @@ using System.Collections;
 public class Score : MonoBehaviour {
 
 	void OnEnable() {
-		Messenger.AddListener("Goal", OnGoal);
+		Messenger.AddListener<PlayerNumbers>("Goal", OnGoal);
 	}
 
 	void OnDisable() {
-		Messenger.RemoveListener("Goal",OnGoal);
+		Messenger.RemoveListener<PlayerNumbers>("Goal",OnGoal);
 	}
 
-	void OnGoal() {
-		Debug.Log ("On Goal Call");
+	void OnGoal(PlayerNumbers player) {
+
+		switch(player){
+			case PlayerNumbers.One: 
+				Debug.Log ("Player 1 Scored");
+				break;
+			case PlayerNumbers.Two: 
+			Debug.Log ("Player 2 Scored");
+				break;
+		}
+
 	}
 	
 }
