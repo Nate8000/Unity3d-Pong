@@ -3,6 +3,14 @@ using System.Collections;
 
 public class Ball : MonoBehaviour {
 
+	void OnEnable() {
+		Messenger.AddListener<PlayerNumbers>("Goal", OnGoal);
+	}
+	
+	void OnDisable() {
+		Messenger.RemoveListener<PlayerNumbers>("Goal",OnGoal);
+	}
+
 	// Use this for initialization
 	void Start () {
 		float randomAngle = Random.Range (0f, 360f);
@@ -35,6 +43,13 @@ public class Ball : MonoBehaviour {
 		newVelocity *= 5;
 
 		rigidbody.velocity = newVelocity;
+
+	}
+
+	void OnGoal(PlayerNumbers player)  {
+
+		transform.position = Vector3.zero;
+		Start ();
 
 	}
 
